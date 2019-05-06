@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Products.Models;
+
 
 namespace Products
 {
@@ -22,6 +24,7 @@ namespace Products
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Add(new ServiceDescriptor(typeof(ProductsContext), new ProductsContext(Configuration.GetConnectionString("DefaultConnection"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +42,10 @@ namespace Products
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Products}/{action=Index}/{id?}");
+            });
         }
     }
 }

@@ -1,0 +1,12 @@
+DROP SCHEMA IF EXISTS `products`;
+CREATE SCHEMA `products`;
+USE `products`;
+
+CREATE TABLE `products` (
+	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`type` VARCHAR(100) NOT NULL,
+	`cost` DECIMAL(10, 2) NOT NULL,
+	`price` DECIMAL(10, 2) NOT NULL,
+	`quantity` INT UNSIGNED NOT NULL,
+	PRIMARY KEY (id)
+);
